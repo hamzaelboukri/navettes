@@ -1,0 +1,70 @@
+  /* Add these styles directly in the page */
+  .role-card {
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 15px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.role-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.role-card.selected {
+    border-color: #28a745;
+    background-color: rgba(40, 167, 69, 0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.role-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.role-title {
+    font-weight: bold;
+}
+
+.role-check {
+    display: none;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: #28a745;
+    font-size: 1.2rem;
+}
+
+.role-card.selected .role-check {
+    display: block;
+}
+
+/* Background styling */
+body {
+    background-color: #f8f9fa;
+}
+
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.left-side {
+    background-color: #4e73df;
+    color: white;
+    padding: 3rem;
+    border-radius: 10px 0 0 10px;
+}
+
+.form-side {
+    background-color: white;
+    padding: 3rem;
+    border-radius: 0 10px 10px 0;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
