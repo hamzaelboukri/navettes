@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('role_permission', function (Blueprint $table) {
             $table->foreignId('role_id')->constrained()->onDelete('cascade');
             $table->foreignId('permission_id')->constrained()->onDelete('cascade');
-            $table->primary(['role_id', 'permission_id']); // Composite primary key
+            $table->primary(['role_id', 'permission_id']); 
         });
     }
 

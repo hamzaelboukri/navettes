@@ -69,60 +69,73 @@
                     </div>
                 @endif
 
-                <div class="card">
-                    <div class="card-header bg-primary text-white">
-                        <h4 class="mb-0">Create New Announcement</h4>
-                    </div>
-                    <div class="card-body">
-                        <form action="{{ route('user.announcements.store') }}" method="POST">
-                            @csrf
-                            <div class="mb-3">
-                                <label for="title" class="form-label">Title</label>
-                                <input type="text" class="form-control" id="title" name="title" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="content" class="form-label">Content</label>
-                                <textarea class="form-control" id="content" name="content" rows="5" required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Create Announcement</button>
-                        </form>
-                    </div>
-                </div>
+                <!-- Button to Open the Modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createAnnouncementModal">
+                    Create New Announcement
+                </button>
 
-                <div class="card mt-4">
-                    <div class="card-header bg-primary text-white">
-                        <h4 class="mb-0">Existing Announcements</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Title</th>
-                                        <th>Content</th>
-                                        <th>Created At</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($announcements as $announcement)
-                                    <tr>
-                                        <td>{{ $announcement->id }}</td>
-                                        <td>{{ $announcement->title }}</td>
-                                        <td>{{ $announcement->content }}</td>
-                                        <td>{{ $announcement->created_at->format('Y-m-d H:i:s') }}</td>
-                                        <td>
-                                            <form action="{{ route('user.announcements.destroy', $announcement->id) }}" method="POST" class="d-inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                <!-- The Modal -->
+                <div class="modal" id="createAnnouncementModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Create New Announcement</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <!-- Modal Body -->
+                            <div class="modal-body">
+                                <form action="{{ route('user.announcements.store') }}" method="POST">
+                                    @csrf
+                                    <div class="mb-3">
+                                        <label for="societe_id" class="form-label">Société ID</label>
+                                        <input type="number" class="form-control" id="societe_id" name="societe_id" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="date_debut" class="form-label">Date Début</label>
+                                        <input type="date" class="form-control" id="date_debut" name="date_debut" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="date_arriver" class="form-label">Date Arriver</label>
+                                        <input type="date" class="form-control" id="date_arriver" name="date_arriver" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="heure_debut" class="form-label">Heure Début</label>
+                                        <input type="time" class="form-control" id="heure_debut" name="heure_debut" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="heure_arriver" class="form-label">Heure Arriver</label>
+                                        <input type="time" class="form-control" id="heure_arriver" name="heure_arriver" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="destination" class="form-label">Destination</label>
+                                        <input type="text" class="form-control" id="destination" name="destination" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="description" class="form-label">Description</label>
+                                        <textarea class="form-control" id="description" name="description" rows="5" required></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="status" class="form-label">Status</label>
+                                        <select class="form-select" id="status" name="status" required>
+                                            <option value="active">Active</option>
+                                            <option value="inactive">Inactive</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="nb_place" class="form-label">Nombre de Places</label>
+                                        <input type="number" class="form-control" id="nb_place" name="nb_place" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Create Announcement</button>
+                                </form>
+                            </div>
+
+                            <!-- Modal Footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                            </div>
                         </div>
                     </div>
                 </div>

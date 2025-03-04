@@ -6,30 +6,23 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('announces', function (Blueprint $table) {
+        Schema::create('announcements', function (Blueprint $table) {
             $table->id();
-            $table->string('date_debut');
-            $table->string('date_arriver');
-            $table->string('heure_debut');
-            $table->string('heure_arriver');
-            $table->enum('status', ['panding', 'fin']);
-            $table->unsignedBigInteger('societe_id'); // Declare foreign key column
-            $table->foreign('societe_id')->references('id')->on('societes')->onDelete('cascade'); // Fix table name
+            $table->date('date_debut');
+            $table->date('date_arriver');
+            $table->time('heure_debut');
+            $table->time('heure_arriver');
+            $table->enum('status', ['pending', 'finished']);
+            $table->unsignedBigInteger('user_id'); 
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
-    
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('announces');
+        Schema::dropIfExists('announcements');
     }
 };

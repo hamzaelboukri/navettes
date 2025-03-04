@@ -8,10 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class announces extends Model
 {
     use HasFactory;
-    
-// protected $tabel= 'announces';
+
     protected $fillable = [
-        'societe_id',
+        'user_id',
         'date_debut', 
         'date_arriver',
         'heure_debut',
@@ -21,12 +20,14 @@ class announces extends Model
         'status',
         'nb_place'
     ];
-    
-    public function societe() {
-        return $this->belongsTo(Societe::class);
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
-    
-    public function reservations() {
+
+    public function reservations()
+    {
         return $this->hasMany(Reservation::class, 'offer_id');
     }
 }
