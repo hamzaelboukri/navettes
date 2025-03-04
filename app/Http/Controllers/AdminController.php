@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Announce;
-use App\Http\Requests\StoreAnnounceRequest;
-use App\Http\Requests\UpdateAnnounceRequest;
+use Illuminate\Http\Request;
 
-class AnnounceController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +25,7 @@ class AnnounceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreAnnounceRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -35,7 +33,7 @@ class AnnounceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Announce $announce)
+    public function show(string $id)
     {
         //
     }
@@ -43,7 +41,7 @@ class AnnounceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Announce $announce)
+    public function edit(string $id)
     {
         //
     }
@@ -51,7 +49,7 @@ class AnnounceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAnnounceRequest $request, Announce $announce)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -59,7 +57,7 @@ class AnnounceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Announce $announce)
+    public function destroy(string $id)
     {
         //
     }

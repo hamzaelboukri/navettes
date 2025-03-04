@@ -16,25 +16,33 @@
             <!-- Login Form -->
             <div class="col-md-6 animate__animated animate__fadeInLeft">
                 <h2 class="mb-3">Connexion</h2>
-                <form action="{{ route('login') }} " method="POST">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <form action="{{ route('login') }}" method="POST">
                     @csrf
 
                     <div class="mb-3">
                         <label for="loginEmail" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="loginEmail" placeholder="Entrez votre email">
+                        <input type="email" class="form-control" id="loginEmail" name="email" placeholder="Entrez votre email">
                     </div>
                     <div class="mb-3">
                         <label for="loginPassword" class="form-label">Mot de passe</label>
-                        <input type="password" class="form-control" id="loginPassword" placeholder="Mot de passe">
+                        <input type="password" class="form-control" id="loginPassword" name="password" placeholder="Mot de passe">
                     </div>
                     <button type="submit" class="btn btn-primary">Se connecter</button>
                 </form>
             </div>
             <!-- Signup Form -->
-            
+        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <script src="{{ asset('js/regisert.js') }}"></script>
-
+    <script src="{{ asset('js/register.js') }}"></script>
 </body>
 </html>

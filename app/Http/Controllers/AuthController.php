@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Client;
-use App\Models\Societe;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,49 +13,70 @@ class AuthController extends Controller
     public function show(){
         return view('auth.register');
     }
-    
+
     public function register(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6|confirmed',
-            'role' => 'required|string|in:client,soigneur' // Updated role names
+            'telephone' => 'nullable|string',
+            'address' => 'nullable|string'
         ]);
-        
-        // Create user in `users` table with role directly
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => $request->role  // Store role name directly
+            'telephone' => $request->telephone,
+            'address' => $request->address,
+            'role_id' => 1, // Default role_id for a regular user
         ]);
-        
-        if ($request->role === 'client') {
-            Client::create([
-                'id' => $user->id,
-                'telephone' => $request->telephone ?? null,
-                'address' => $request->address ?? null,
-            ]);
-            
-            Auth::login($user);
-            return redirect('/pageclient'); 
-        } 
-        elseif ($request->role === 'soigneur') {
-            Societe::create([
-                'name' => $request->name,
-                'description' => $request->description ?? '',
-                'address' => $request->address ?? '',
-                'Telephone' => $request->telephone ?? null,
-                'user_id' => $user->id 
-            ]);
-            
-            Auth::login($user);
-            return redirect('/societe'); 
-        }
-        
-        // Default redirect for admin or other roles
+
         Auth::login($user);
-        return redirect('/dashboard'); 
+
+        $adminExists = User::where('role_id', 2)->exists();
+        if (!$adminExists) {
+            $adminRole = Role::find(2); 
+            if ($adminRole) {
+                $user->role_id = $adminRole->id;
+                $user->save();
+                return redirect('/admin/dashboard');
+            }
+        }
+
+        return redirect('/user/dashboard');
+    }
+
+    public function showUserDashboard()
+    {
+        return view('user.dashboard');
+    }
+
+    public function showAdminDashboard()
+    {
+        if (Auth::user()->role_id !== 2) {
+            return redirect('/user/dashboard')->with('error', 'Unauthorized access');
+        }
+
+        $users = User::with('role')->get();
+        return view('admin.dashboard', compact('users'));
+    }
+
+    public function updateUserRole(Request $request, $id)
+    {
+        if (Auth::user()->role_id !== 2) {
+            return redirect()->back()->with('error', 'Unauthorized action');
+        }
+
+        $request->validate([
+            'role_id' => 'required|exists:roles,id',
+        ]);
+
+        $user = User::findOrFail($id);
+        $user->role_id = $request->role_id;
+        $user->save();
+
+        return redirect()->back()->with('success', 'User role updated successfully');
     }
 }

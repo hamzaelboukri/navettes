@@ -13,7 +13,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.role');
     }
 
     /**
@@ -29,7 +29,7 @@ class RoleController extends Controller
      */
     public function store(StoreroleRequest $request)
     {
-        //
+        
     }
 
     /**

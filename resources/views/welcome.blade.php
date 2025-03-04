@@ -31,8 +31,8 @@
                 <i class="fas fa-bus me-2"></i>NavetteConnect
             </a>
             <div class="ms-auto">
-            <a href="{{route('login') }}" class="btn btn-outline-light me-2">Connexion</a>
-            <a href="{{route('show')}}" class="btn btn-light">Inscription</a>
+                <a href="{{ route('login.show') }}" class="btn btn-outline-light me-2">Connexion</a>
+                <a href="{{ route('register.show') }}" class="btn btn-light">Inscription</a>
             </div>
         </div>
     </nav>
@@ -43,7 +43,7 @@
             <h1 class="display-4 fw-bold mb-4">Simplifiez vos déplacements quotidiens</h1>
             <p class="lead mb-5">NavetteConnect est une plateforme qui connecte les sociétés de transport et les voyageurs pour des abonnements de navettes simples et efficaces.</p>
             <div>
-                <a href="#" class="btn btn-light btn-lg me-2">S'inscrire</a>
+                <a href="{{ route('register.show') }}" class="btn btn-light btn-lg me-2">S'inscrire</a>
                 <a href="#" class="btn btn-outline-light btn-lg">En savoir plus</a>
             </div>
         </div>
@@ -84,8 +84,8 @@
         <div class="container text-center">
             <h2 class="mb-4">Prêt à commencer ?</h2>
             <p class="lead mb-4">Rejoignez NavetteConnect dès aujourd'hui et transformez votre expérience de transport quotidien.</p>
-            <a href="#" class="btn btn-light btn-lg me-2">Connexion</a>
-            <a href="#" class="btn btn-outline-light btn-lg">Inscription</a>
+            <a href="{{ route('login.show') }}" class="btn btn-light btn-lg me-2">Connexion</a>
+            <a href="{{ route('register.show') }}" class="btn btn-outline-light btn-lg">Inscription</a>
         </div>
     </section>
 

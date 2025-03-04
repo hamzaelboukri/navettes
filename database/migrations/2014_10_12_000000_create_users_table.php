@@ -11,20 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Check if role_id exists, if it does, we need to replace it with role string
-        if (Schema::hasColumn('users', 'role_id')) {
-            Schema::table('users', function (Blueprint $table) {
-                $table->dropForeign(['role_id']);
-                $table->dropColumn('role_id');
-            });
-        }
+        Schema::create('users', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->unsignedBigInteger('role_id')->default(2); 
+            $table->string('telephone')->nullable();
+            $table->string('address')->nullable();
+            $table->timestamps();
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+        });
         
-        // Add role column if it doesn't exist
-        if (!Schema::hasColumn('users', 'role')) {
-            Schema::table('users', function (Blueprint $table) {
-                $table->string('role')->default('client')->after('password');
-            });
-        }
     }
 
     /**
@@ -32,10 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        if (Schema::hasColumn('users', 'role')) {
-            Schema::table('users', function (Blueprint $table) {
-                $table->dropColumn('role');
-            });
-        }
+        Schema::dropIfExists('users');
     }
 };

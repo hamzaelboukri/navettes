@@ -20,7 +20,7 @@
                     <p class="lead">Inscrivez-vous pour accéder à notre plateforme et profiter de tous nos services.</p>
                     <div class="mt-5">
                         <p>Vous avez déjà un compte?</p>
-                        <a href="{{ route('index') }}" class="btn btn-outline-light">Se connecter</a>
+                        <a href="{{ route('login.show') }}" class="btn btn-outline-light">Se connecter</a>
                     </div>
                 </div>
             </div>
